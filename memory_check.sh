@@ -30,7 +30,16 @@ run_with_valgrind() {
         echo "Fuites de mémoire détectées pour la commande: $command"
         echo "*******************************************************"
 		echo "Sortie Valgrind:"
-        echo "$valgrind_output"
+
+        # Vérifier si la valeur après "definitely lost:" est autre que 0
+        if echo "$valgrind_output" | grep -q "definitely lost: [1-9]"; then
+            # Afficher la sortie en rouge
+            echo -e "\033[91m$valgrind_output\033[0m"
+        else
+            # Afficher la sortie normalement
+            echo "$valgrind_output"
+        fi
+
         echo "---------------------------------------"
         echo "Commande: $command" >> "$LEAKS_OUTPUT_FILE"
         echo "Sortie Valgrind:" >> "$LEAKS_OUTPUT_FILE"
