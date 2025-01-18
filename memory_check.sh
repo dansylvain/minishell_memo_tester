@@ -1,15 +1,15 @@
 #!/bin/bash
 
-# Définir le chemin de votre exécutable Minishell
-MINISHELL_EXECUTABLE="../minishell"
+# Obtenir le chemin absolu du répertoire courant
+CURRENT_DIR=$(pwd)
 
-# Créer un fichier pour stocker les commandes avec fuites de mémoire
-LEAKS_OUTPUT_FILE="outfile/leaks_output.txt"
-> "$LEAKS_OUTPUT_FILE"
+# Obtenir le chemin absolu de l'exécutable Minishell
+MINISHELL_EXECUTABLE=$(dirname "$CURRENT_DIR")/minishell
 
-# Vérifier si le fichier d'entrée des commandes est spécifié en argument
-if [ -z "$1" ]; then
-    echo "Usage: $0 <fichier_commandes>"
+# Vérifier si l'exécutable Minishell est présent et exécutable
+if [ ! -f "$MINISHELL_EXECUTABLE" ] || [ ! -x "$MINISHELL_EXECUTABLE" ]; then
+    echo "Fichier inexistant ou non exécutable : $MINISHELL_EXECUTABLE"
+    echo "Pas d'exécutable minishell. Compiler le projet?"
     exit 1
 fi
 
