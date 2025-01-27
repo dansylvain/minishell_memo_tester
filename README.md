@@ -1,35 +1,34 @@
 # minishell_memo_tester
 
-
 ## Introduction
-Ce dossier contient un testeur de mémoire pour le projet Minishell. Il est conçu pour détecter les fuites de mémoire dans le code du Minishell.
+This folder contains a memory tester for the Minishell project. It is designed to detect memory leaks in the Minishell code.
 
 ## Installation
-Pour utiliser ce testeur, clonez directement ce dossier à la racine du projet Minishell.
+To use this tester, clone this folder directly to the root of the Minishell project.
 
-## Exécution
-Pour exécuter le testeur, placez-vous dans le dossier du testeur et exécutez le script memory_check.sh en passant un fichier de commandes en argument. Par exemple :
-
-```bash
-./memory_check.sh commandes.txt
-```
-
-Vous pouvez personnaliser les fichiers de commandes pour tester les commandes que vous souhaitez.
-
-## Résultats
-Si des fuites de mémoire sont détectées, la sortie de Valgrind sera affichée sur la sortie standard. Il est important de vérifier que les fonctions responsables des fuites évoquées dans la sortie Valgrind ne sont pas ignorées.
-
-## Attention
-Malgré le fait que la plupart des fuites inhérentes à des fonctions du type cat, ls, grep, etc. sont ignorées, certaines fuites ne sont pas ignorées. Il est donc important de vérifier que les fonctions responsables des fuites évoquées dans la sortie Valgrind ne sont pas compromettantes.
-
-## Sortie Valgrind
-Lorsqu'une fuite provoque des fuites "definitely lost", la sortie de Valgrind sera en rouge.
-
-## Exemple d'utilisation
-Pour tester les commandes contenues dans le fichier commandes.txt, exécutez la commande suivante :
+## Execution
+To run the tester, place yourself in the tester folder and execute the memory_check.sh script by passing a command file as an argument. For example:
 
 ```bash
-./memory_check.sh commandes.txt
+./memory_check.sh commands.txt
 ```
 
-Si des fuites de mémoire sont détectées, la sortie de Valgrind sera affichée sur la sortie standard.
+You can customize the command files to test the commands you want.
+
+## Results
+If memory leaks are detected, Valgrind's output will be displayed on the standard output. It is important to check that the functions responsible for the leaks mentioned in the Valgrind output are not ignored.
+
+## Warning
+Although most leaks inherent to functions of the type cat, ls, grep, etc. are ignored, some leaks are not ignored. It is therefore important to check that the functions responsible for the leaks mentioned in the Valgrind output are not compromising.
+
+## Valgrind Output
+When a leak causes "definitely lost" leaks, Valgrind's output will be in red.
+
+## Example Usage
+To test the commands contained in the commands.txt file, run the following command:
+
+```bash
+./memory_check.sh commands.txt
+```
+
+If memory leaks are detected, Valgrind's output will be displayed on the standard output.
