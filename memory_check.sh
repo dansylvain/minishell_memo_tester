@@ -8,8 +8,8 @@ MINISHELL_EXECUTABLE=$(dirname "$CURRENT_DIR")/minishell
 
 # Vérifier si l'exécutable Minishell est présent et exécutable
 if [ ! -f "$MINISHELL_EXECUTABLE" ] || [ ! -x "$MINISHELL_EXECUTABLE" ]; then
-    echo "Fichier inexistant ou non exécutable : $MINISHELL_EXECUTABLE"
-    echo "Pas d'exécutable minishell. Compiler le projet?"
+    echo "File not found or not executable : $MINISHELL_EXECUTABLE"
+    echo "No minishell executable. Compile the project?"
     exit 1
 fi
 
@@ -27,9 +27,9 @@ run_with_valgrind() {
     if echo "$valgrind_output" | grep -q "0x"; then
 		echo "---------------------------------------"
 		echo "*******************************************************"
-        echo "Fuites de mémoire détectées pour la commande: $command"
+        echo "Memory leaks detected for the command: $command"
         echo "*******************************************************"
-		echo "Sortie Valgrind:"
+		echo "Valgrind output:"
 
         # Vérifier si la valeur après "definitely lost:" est autre que 0
         if echo "$valgrind_output" | grep -q "definitely lost: [1-9]"; then
@@ -41,8 +41,8 @@ run_with_valgrind() {
         fi
 
         echo "---------------------------------------"
-        echo "Commande: $command" >> "$LEAKS_OUTPUT_FILE"
-        echo "Sortie Valgrind:" >> "$LEAKS_OUTPUT_FILE"
+        echo "Command: $command" >> "$LEAKS_OUTPUT_FILE"
+        echo "Valgrind output:" >> "$LEAKS_OUTPUT_FILE"
         echo "$valgrind_output" >> "$LEAKS_OUTPUT_FILE"
         echo "" >> "$LEAKS_OUTPUT_FILE"
 	else
@@ -58,5 +58,7 @@ while IFS= read -r cmd; do
     run_with_valgrind "$cmd"
 done < "$1"
 
-echo "Analyse des fuites de mémoire terminée."
+echo "Memory leak analysis finished."
 echo "TESTS : $successful_tests / $total_tests"
+
+# merci chatGPT
